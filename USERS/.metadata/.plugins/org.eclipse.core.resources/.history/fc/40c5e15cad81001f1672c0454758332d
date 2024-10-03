@@ -1,0 +1,57 @@
+package com.users.controler;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.users.dominio.Users;
+import com.users.service.UsersImp;
+
+import lombok.Delegate;
+
+@RestController
+@RequestMapping(path = "/api/users")
+public class UserWS {
+
+	@Autowired
+	private UsersImp imp;
+	
+	@PostMapping
+	public ResponseEntity<Users>nuevoUsuario(@RequestBody Users user){
+		Users newUser = imp.nuevo(user);
+		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+		
+	}
+	
+	@GetMapping
+	public ResponseEntity<?> mostrar(){
+		List<Users> users = imp.mostar();
+		if (users.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("no hay registros disponibles");
+		}else {
+			return ResponseEntity.ok(users);
+		}
+	}
+	
+	@PutMapping
+	public ResponseEntity<String> editar(@RequestBody Users user){
+		imp.editar(user);
+		return ResponseEntity.ok("User editado" + user);
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<String> eliminar(@RequestBody Users user){
+		imp.eliminar(user);
+		return ResponseEntity.ok("User eliminado" + user);
+
+	}
+}

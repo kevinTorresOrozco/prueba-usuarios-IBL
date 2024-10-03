@@ -1,0 +1,20 @@
+package com.users;
+
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.users.dominio.Users;
+import com.users.repository.IUsersRep;
+
+@Service
+public class UserServ {
+	
+	@Autowired
+	private IUsersRep rep;
+	
+	public void nuevo( User user) {
+		return rep.save(user);
+	}
+
+}

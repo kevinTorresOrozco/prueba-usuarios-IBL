@@ -1,0 +1,14 @@
+spring.application.name=USERS
+
+server.port=8010
+
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username=SYSTEM
+spring.datasource.password=CURSO2024
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.jpa.database=ORACLE
+spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
+spring.jpa.properties.hibernate.format-sql = true
+
+logging.level.org.hibernate.sql = debug
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=trace

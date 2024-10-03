@@ -1,0 +1,5 @@
+package com.users.repository;
+
+public interface IUsersRep {
+
+}
